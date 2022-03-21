@@ -1,26 +1,28 @@
+; компиляция: make all
+; запуск: make run
 section .text
     use16
-    org  0x7C00
+    org 0x7C00
+
+; void start()
 start:
-    mov  ax, cs
-    mov  ds, ax
+    call initInt8
+    mov ax, cs
+    mov ds, ax
  
-    mov  si, message
-    cld
-    mov  ah, 0x0E
-    mov  bh, 0x00
-puts_loop:
-    lodsb
-    test al, al
-    jz   puts_loop_exit
-    int  0x10
-    jmp  puts_loop
-puts_loop_exit:
-    jmp $
- 
-message:
-    db 'Hello World!', 0
+    mov si, message
+    call puts
+    mov si, cmdmsg0
+    call puts
+    call cmdLoop
+; void cmdLoop()
+cmdLoop:
+    jmp cmdLoop
+
+%include "std.asm"
+%include "text.asm"
+%include "interrupts.asm"
+
 finish:
     times 0x1FE-finish+start db 0
-    db   0x55, 0xAA
-    ;рети-рети интеррапт, через шины данных тракт, через память, через порт, возвращайся в главный код
+    db 0x55, 0xAA
