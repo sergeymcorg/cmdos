@@ -16,6 +16,10 @@ rpop:
     pop ax
     ret
 
+; void printNumber(uint16_t number, char newline)
+printNumber:
+    ret
+
 ; void puts(const char *message)
 puts:
     cld
@@ -26,5 +30,4 @@ puts:
     jz puts_exit
     int 0x10
     jmp puts
-; void puts_exit()
 puts_exit: ret
