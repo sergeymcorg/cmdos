@@ -3,7 +3,12 @@ section .text
 
 %include "macros.asm"
 
-message: db "lozhkaOS loader", NEWLINE, NEWLINE, 0
-cmdmsg0: db "> ", 0
-int8msg: db "int8!!", NEWLINE, 0
-int9msg: db "keyboard input", NEWLINE, 0
+ldrmesg: db "lozhkaOS loader", NEWLINE, NEWLINE, 0
+int9msg: db "WARN: Keyboard Input", NEWLINE, 0
+int0msg: db "ERROR: Divided by 0", NEWLINE, 0
+deverrm: db "WARN: Device Error", NEWLINE, 0
+outofmm: db "WARN: Out Of Memory", NEWLINE, 0
+
+;help? ?
+msghelp: db "help - help", NEWLINE, "wrmm - write to ram", NEWLINE, "rdmm - read ram", NEWLINE, 0  ;тут потом будут описаны команды
+cmdline: db "lozhka$ ", 0

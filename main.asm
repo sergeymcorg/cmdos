@@ -6,18 +6,16 @@ section .text
 
 ; void start()
 start:
+    ; call printNumber
+    pushf
     call initInt8
     mov ax, cs
     mov ds, ax
  
-    mov si, message
+    mov si, ldrmesg
     call puts
-    mov si, cmdmsg0
+    mov si, cmdline
     call puts
-    call cmdLoop
-; void cmdLoop()
-cmdLoop:
-    jmp cmdLoop
 
 %include "std.asm"
 %include "text.asm"

@@ -6,31 +6,29 @@ section .text
 intRet:
     mov al, 0x20
     out 0x20, al
-    ; pop cx
-    ; pop si
-    ; pop ax
+    pop ax
     iret
-int8:
-    ; mov si, int8msg
-    ; call puts
-    jmp intRet
 int9:
-    mov si, int9msg
+    push ax
     in al, 60h
+    call putc
+    jmp intRet
+int0:
+    mov si, int0msg
     call puts
     jmp intRet
 initInt8:
     cli
-    
-    xor ax, ax
-    mov es, ax
-    mov word [es:8*4], int8
-    mov [es:8*4+2], cs
 
     xor ax, ax
     mov es, ax
     mov word [es:9*4], int9
     mov [es:9*4+2], cs
+
+    xor ax, ax
+    mov es, ax
+    mov word [es:0*4], int0
+    mov [es:0*4+2], cs
 
     sti
     ret
